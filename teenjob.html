@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)file:///C:/Users/USER/Downloads/teenjob_21.html -->
+<html lang="he" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TeenJob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./teenjob_files/css2" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg0:#050507;--bg1:#0c0c12;--bg2:#111118;--bg3:#18181f;--bg4:#1e1e28;
+  --neon:#39ff6e;--cyan:#00e5a0;
+  --w:#fff;--w80:rgba(255,255,255,.8);--w50:rgba(255,255,255,.5);
+  --w30:rgba(255,255,255,.3);--w15:rgba(255,255,255,.15);--w08:rgba(255,255,255,.08);
+  --danger:#ff4d6d;--warn:#f59e0b;
+  --r-md:12px;--r-lg:18px;
+  font-family:'Inter',sans-serif;
+}
+html,body{height:100%;width:100%;margin:0;padding:0}
+body{background:#000;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:600px;background:var(--bg0);min-height:100vh;display:flex;flex-direction:column;border-left:1px solid var(--w15);border-right:1px solid var(--w15);position:relative}
+@media(min-width:700px){
+  body{align-items:flex-start}
+  .app{min-height:100vh}
+}
+.screen{display:none;flex:1;flex-direction:column;overflow:hidden;min-height:0}
+.screen.active{display:flex}
+.sb{flex:1;overflow-y:auto;padding:14px 16px 84px;scrollbar-width:thin;scrollbar-color:var(--w15) transparent}
+.topbar{background:var(--bg1);border-bottom:1.5px solid var(--w15);padding:13px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:var(--r-lg);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;width:100%;border:2px solid var(--w);background:rgba(255,255,255,.12);color:var(--w);box-shadow:0 2px 16px rgba(255,255,255,.18)}
+.btn:hover{background:rgba(255,255,255,.2);box-shadow:0 4px 24px rgba(255,255,255,.3)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn-emp{border-color:var(--cyan);background:rgba(0,229,160,.12);color:var(--cyan);box-shadow:0 2px 14px rgba(0,229,160,.22)}
+.btn-emp:hover{background:rgba(0,229,160,.2)}
+.btn-dim{border-color:var(--w50);background:rgba(255,255,255,.06);color:var(--w80)}
+.btn-dim:hover{border-color:var(--w);background:rgba(255,255,255,.12);color:var(--w)}
+.btn-yes{border-color:var(--neon);background:rgba(57,255,110,.12);color:var(--neon)}
+.btn-yes:hover{background:rgba(57,255,110,.2)}
+.btn-no{border-color:var(--danger);background:rgba(255,77,109,.1);color:#ff8099}
+.btn-no:hover{background:rgba(255,77,109,.18);color:var(--danger)}
+.btn-neon{border-color:var(--neon);background:rgba(57,255,110,.1);color:var(--neon)}
+.btn-chat{border-color:var(--cyan);background:rgba(0,229,160,.1);color:var(--cyan)}
+.btn-sm{width:auto;padding:9px 15px;font-size:12px;border-radius:var(--r-md);border-width:1.5px}
+.btn-icon{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--w50);background:rgba(255,255,255,.1);color:var(--w);display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Montserrat',sans-serif;font-size:14px;cursor:pointer;flex-shrink:0;transition:all .15s}
+.btn-icon:hover{border-color:var(--w);background:rgba(255,255,255,.18)}
+.back{font-size:24px;color:var(--w80);cursor:pointer;background:none;border:none;line-height:1;padding:0}
+.inp{width:100%;background:var(--bg3);border:2px solid var(--w30);border-radius:var(--r-md);padding:11px 14px;font-size:14px;color:var(--w);outline:none;font-family:'Inter',sans-serif;transition:border-color .2s;-webkit-appearance:none}
+.inp::placeholder{color:var(--w30)}.inp:focus{border-color:var(--w80);box-shadow:0 0 0 3px var(--w08)}
+.txta{width:100%;background:var(--bg3);border:2px solid var(--w30);border-radius:var(--r-md);padding:11px 14px;font-size:14px;color:var(--w);outline:none;font-family:'Inter',sans-serif;resize:none;transition:border-color .2s}
+.txta::placeholder{color:var(--w30)}.txta:focus{border-color:var(--w80)}
+.lbl{font-size:11px;font-weight:700;color:var(--w50);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px;font-family:'Montserrat',sans-serif}
+.chip{padding:7px 14px;border-radius:999px;font-size:12px;font-weight:700;border:2px solid var(--w30);cursor:pointer;background:rgba(255,255,255,.06);color:var(--w50);font-family:'Montserrat',sans-serif;transition:all .16s;white-space:nowrap}
+.chip:hover{border-color:var(--w80);color:var(--w)}
+.chip.on{background:rgba(57,255,110,.15);color:var(--neon);border-color:var(--neon);box-shadow:0 0 12px rgba(57,255,110,.3)}
+.card{background:var(--w08);border:1.5px solid var(--w15);border-radius:var(--r-lg);padding:14px;transition:border-color .2s}
+.card:hover{border-color:var(--w30)}
+.card-s{background:var(--w08);border:1.5px solid var(--w15);border-radius:var(--r-lg);padding:14px}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;font-family:'Montserrat',sans-serif}
+.sbadge{font-size:11px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap;font-family:'Montserrat',sans-serif;border:1.5px solid}
+.sw{background:rgba(255,255,255,.06);border-color:var(--w30);color:var(--w50)}
+.sa{background:rgba(57,255,110,.1);border-color:var(--neon);color:var(--neon)}
+.sr{background:rgba(255,77,109,.1);border-color:var(--danger);color:#ff8099}
+.rbar{height:4px;background:var(--bg4);border-radius:999px;overflow:hidden;margin-top:4px}
+.lockbox{background:var(--bg3);border:1.5px solid var(--w30);border-radius:var(--r-md);padding:10px 13px;display:flex;align-items:center;gap:9px}
+.cpill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;border:1.5px solid}
+.starbtn{flex:1;height:32px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .12s;font-family:'Montserrat',sans-serif;background:rgba(255,255,255,.07);border:1.5px solid var(--w30);color:var(--w50)}
+.starbtn:hover{border-color:var(--w);color:var(--w)}
+.starbtn.slo{border-color:var(--danger);color:var(--danger);background:rgba(255,77,109,.13)}
+.starbtn.smid{border-color:var(--warn);color:var(--warn);background:rgba(245,158,11,.13)}
+.starbtn.shi{border-color:var(--w);color:var(--w);background:rgba(255,255,255,.14)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:flex-end;justify-content:center;z-index:300;backdrop-filter:blur(6px)}
+.msheet{background:var(--bg2);border:2px solid var(--w30);width:100%;max-width:600px;border-radius:20px 20px 0 0;padding:18px 18px 32px;max-height:90vh;overflow-y:auto;scrollbar-width:thin}
+.mhdl{width:40px;height:3px;background:var(--w30);border-radius:999px;margin:0 auto 14px}
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:600px;height:62px;background:var(--bg1);border-top:2px solid var(--w15);display:flex;align-items:stretch;z-index:50}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:transparent;cursor:pointer;font-size:10px;font-weight:700;color:var(--w30);font-family:'Montserrat',sans-serif;position:relative;transition:color .2s}
+.nb.on{color:var(--w)}.ni{font-size:18px;line-height:1}
+.etab{flex:1;padding:9px 4px;text-align:center;font-size:11px;font-weight:700;border:none;cursor:pointer;border-bottom:2px solid transparent;background:transparent;color:var(--w30);font-family:'Montserrat',sans-serif;transition:all .2s}
+.etab.on{color:var(--w);border-bottom-color:var(--w)}
+.es{text-align:center;padding:50px 28px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.es-icon{font-size:40px}.es-t{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--w)}
+.es-s{font-size:12px;color:var(--w30);line-height:1.6}
+.chat-msgs{flex:1;overflow-y:auto;padding:14px 16px 8px;display:flex;flex-direction:column;gap:10px}
+.msg-bubble{max-width:78%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.5;word-break:break-word}
+.msg-me{align-self:flex-end;background:rgba(255,255,255,.13);border:1.5px solid var(--w30);color:var(--w);border-bottom-right-radius:4px}
+.msg-other{align-self:flex-start;background:rgba(57,255,110,.1);border:1.5px solid rgba(57,255,110,.3);color:var(--neon);border-bottom-left-radius:4px}
+.msg-time{font-size:9px;opacity:.5;margin-top:3px;text-align:right}
+.chat-row{display:flex;gap:10px;padding:12px 16px;background:var(--bg1);border-top:1.5px solid var(--w15);flex-shrink:0}
+.chat-inp{flex:1;background:var(--bg3);border:2px solid var(--w30);border-radius:var(--r-md);padding:11px 14px;font-size:13px;color:var(--w);outline:none;font-family:'Inter',sans-serif}
+.chat-inp:focus{border-color:var(--w80)}.chat-inp::placeholder{color:var(--w30)}
+.send-btn{width:46px;height:46px;border-radius:10px;background:rgba(255,255,255,.12);border:2px solid var(--w);color:var(--w);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;flex-shrink:0;transition:all .15s}
+.send-btn:hover{background:rgba(255,255,255,.2)}
+.send-btn:active{transform:scale(.93)}
+.avatar-wrap{position:relative;width:90px;height:90px;cursor:pointer}
+.avatar-wrap input[type=file]{display:none}
+.avatar-circle{width:90px;height:90px;border-radius:50%;background:var(--bg3);border:2.5px solid var(--w);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:30px;font-weight:700;color:var(--w);overflow:hidden;object-fit:cover}
+.avatar-circle img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.avatar-edit{position:absolute;bottom:0;right:0;width:28px;height:28px;border-radius:50%;background:var(--neon);border:2px solid var(--bg0);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer}
+.upload-progress{height:3px;background:var(--w15);border-radius:999px;overflow:hidden;margin-top:6px;display:none}
+.upload-progress-bar{height:100%;background:var(--neon);border-radius:999px;width:0%;transition:width .3s}
+.spinner{width:40px;height:40px;border:3px solid var(--w15);border-top-color:var(--neon);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* NOTIFICATIONS */
+#notif-container{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:560px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.notif{background:var(--bg2);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:flex-start;gap:12px;pointer-events:all;animation:slideDown .35s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 40px rgba(0,0,0,.7)}
+.notif-accepted{border:2px solid var(--neon);box-shadow:0 0 24px rgba(57,255,110,.3),0 8px 40px rgba(0,0,0,.7)}
+.notif-newjob{border:2px solid var(--cyan);box-shadow:0 0 24px rgba(0,229,160,.25),0 8px 40px rgba(0,0,0,.7)}
+.notif-rejected{border:2px solid var(--danger);box-shadow:0 0 20px rgba(255,77,109,.2),0 8px 40px rgba(0,0,0,.7)}
+.notif-icon{font-size:26px;flex-shrink:0;margin-top:1px}
+.notif-body{flex:1;min-width:0}
+.notif-title{font-family:Montserrat,sans-serif;font-size:14px;font-weight:700;color:var(--w);margin-bottom:3px}
+.notif-text{font-size:12px;color:var(--w50);line-height:1.5}
+.notif-close{font-size:18px;color:var(--w30);cursor:pointer;background:none;border:none;line-height:1;flex-shrink:0;padding:0;transition:color .15s}
+.notif-close:hover{color:var(--w)}
+.notif-bar{height:3px;border-radius:999px;margin-top:10px;animation:shrink 5s linear forwards}
+.notif-bar-neon{background:var(--neon)}
+.notif-bar-cyan{background:var(--cyan)}
+.notif-bar-danger{background:var(--danger)}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes shrink{from{width:100%}to{width:0%}}
+.bell-btn{position:relative;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--w50);background:rgba(255,255,255,.1);color:var(--w);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:17px;transition:all .15s}
+.bell-btn:hover{border-color:var(--w);background:rgba(255,255,255,.18)}
+.bell-dot{position:absolute;top:2px;right:2px;width:9px;height:9px;background:var(--neon);border-radius:50%;border:2px solid var(--bg0);display:none;box-shadow:0 0 6px var(--neon)}
+.job-status-closed{background:rgba(255,77,109,.1);border:1.5px solid var(--danger);color:var(--danger);font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;font-family:Montserrat,sans-serif}
+/* blind rating */
+.blind-card{background:linear-gradient(135deg,rgba(57,255,110,.07),rgba(0,229,160,.05));border:2px solid var(--neon);border-radius:var(--r-lg);padding:16px;position:relative;overflow:hidden}
+.blind-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(57,255,110,.12),transparent 60%);pointer-events:none}
+.blind-score-blur{font-family:Montserrat,sans-serif;font-size:40px;font-weight:900;color:var(--neon);filter:blur(12px);text-shadow:0 0 30px rgba(57,255,110,.8);user-select:none;letter-spacing:-1px}
+.blind-score-reveal{font-family:Montserrat,sans-serif;font-size:40px;font-weight:900;color:var(--neon);text-shadow:0 0 20px rgba(57,255,110,.7);letter-spacing:-1px;animation:revealPop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes revealPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.reveal-btn{background:rgba(57,255,110,.12);border:2px solid var(--neon);color:var(--neon);border-radius:var(--r-lg);padding:12px 18px;font-family:Montserrat,sans-serif;font-size:13px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;margin-top:12px}
+.reveal-btn:hover{background:rgba(57,255,110,.22);box-shadow:0 0 18px rgba(57,255,110,.35)}
+.reveal-btn:active{transform:scale(.97)}
+</style>
+</head>
+<body>
+<div id="notif-container"></div>
+<div class="app" id="app">
+
+<!-- LOADING -->
+<div class="screen" id="s-loading">
+  <div class="loading">
+    <div class="spinner"></div>
+    <div style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:24px;font-weight:900;color:var(--w)">Teen<span style="color:var(--neon)">Job</span></div>
+    <div style="font-size:12px;color:var(--w30)">מתחבר לשרת...</div>
+  </div>
+</div>
+
+<!-- LANDING -->
+<div class="screen" id="s-land">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 24px;text-align:center">
+    <div style="margin-bottom:12px">
+      <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:52px;color:var(--w);letter-spacing:-3px">Teen</span><span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:900;font-size:52px;color:var(--neon);letter-spacing:-3px;text-shadow:0 0 28px rgba(57,255,110,.85)">Job</span>
+    </div>
+    <div style="font-size:13px;color:var(--w30);letter-spacing:.1em;font-family:&#39;Montserrat&#39;,sans-serif;font-weight:600;margin-bottom:36px">הפלטפורמה לעבודה ראשונה · גילאי 13–18</div>
+    <div style="display:flex;flex-direction:column;gap:14px;width:100%;max-width:400px">
+      <button class="btn" onclick="go(&#39;s-setup&#39;)" style="padding:18px 20px;font-size:16px">
+        <span style="font-size:24px">🎒</span>
+        <div style="text-align:right"><div style="font-size:16px;font-weight:900">אני מחפש/ת עבודה</div><div style="font-size:11px;font-weight:500;opacity:.7;margin-top:2px">בני נוער גילאי 13–18</div></div>
+      </button>
+      <button class="btn btn-emp" onclick="go(&#39;s-emp-setup&#39;)" style="padding:18px 20px;font-size:16px">
+        <span style="font-size:24px">🏢</span>
+        <div style="text-align:right"><div style="font-size:16px;font-weight:900">אני מעסיק/ה</div><div style="font-size:11px;font-weight:500;opacity:.7;margin-top:2px">פרסם משרות · נהל מועמדים</div></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TEEN SETUP (after registration) -->
+<div class="screen" id="s-setup">
+  <div class="topbar"><span style="font-size:15px;font-weight:700;color:var(--w);font-family:&#39;Montserrat&#39;,sans-serif">קצת עליך 🎒</span></div>
+  <div class="sb" style="display:flex;flex-direction:column;gap:14px">
+    <div style="font-size:13px;color:var(--w50)">מלא/י את הפרטים כדי שמעסיקים ימצאו אותך</div>
+    <div><label class="lbl">שם מלא *</label><input class="inp" id="su-n" placeholder="השם שלך"></div>
+    <div><label class="lbl">גיל *</label><input class="inp" id="su-a" type="number" min="13" max="18" placeholder="13–18"></div>
+    <div><label class="lbl">Bio — קצת עליי</label><textarea class="txta" id="su-b" style="height:72px" placeholder="כישורים, זמינות, מה אני מחפש/ת..."></textarea></div>
+    <div>
+      <label class="lbl">שכר מינימום — <span id="su-pl" style="color:var(--w);font-weight:800">₪35</span>/שעה</label>
+      <input type="range" min="25" max="70" step="1" value="35" id="su-pay" style="width:100%;accent-color:var(--w);margin-top:8px" oninput="document.getElementById(&#39;su-pl&#39;).textContent=&#39;₪&#39;+this.value">
+    </div>
+    <div><label class="lbl">תחומי עניין</label><div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:5px" id="su-cats"><button class="chip" data-v="מסעדנות">מסעדנות</button><button class="chip" data-v="קמעונאות">קמעונאות</button><button class="chip" data-v="הדרכה">הדרכה</button><button class="chip" data-v="שירות לקוחות">שירות לקוחות</button><button class="chip" data-v="יצירה ועיצוב">יצירה ועיצוב</button><button class="chip" data-v="ספורט ופנאי">ספורט ופנאי</button><button class="chip" data-v="טכנולוגיה">טכנולוגיה</button><button class="chip" data-v="בייביסיטינג">בייביסיטינג</button><button class="chip" data-v="דוג ווקר">דוג ווקר</button><button class="chip" data-v="ניקיון וסדר">ניקיון וסדר</button><button class="chip" data-v="עבודות כפיים">עבודות כפיים</button><button class="chip" data-v="חקלאות וטבע">חקלאות וטבע</button><button class="chip" data-v="אדמיניסטרציה">אדמיניסטרציה</button></div></div>
+    <button class="btn" onclick="setupTeen()">קדימה! →</button>
+    <div id="su-err" style="display:none;font-size:12px;color:var(--danger);font-family:&#39;Montserrat&#39;,sans-serif;font-weight:700"></div>
+  </div>
+</div>
+
+<!-- EMP SETUP (after registration) -->
+<div class="screen" id="s-emp-setup">
+  <div class="topbar"><span style="font-size:15px;font-weight:700;color:var(--w);font-family:&#39;Montserrat&#39;,sans-serif">פרטי העסק 🏢</span></div>
+  <div class="sb" style="display:flex;flex-direction:column;gap:14px">
+    <div style="font-size:13px;color:var(--w50)">מלא/י פרטים כדי שבני נוער יכירו את העסק שלך</div>
+    <div><label class="lbl">שם העסק *</label><input class="inp" id="eu-n" placeholder="שם העסק שלך"></div>
+    <div><label class="lbl">תיאור קצר</label><textarea class="txta" id="eu-b" style="height:72px" placeholder="ספר/י על העסק..."></textarea></div>
+    <button class="btn btn-emp" onclick="setupEmp()">המשך →</button>
+    <div id="eu-err" style="display:none;font-size:12px;color:var(--danger);font-family:&#39;Montserrat&#39;,sans-serif;font-weight:700"></div>
+  </div>
+</div>
+
+<!-- TEEN: FEED -->
+<div class="screen active" id="s-feed">
+  <div class="topbar" style="flex-direction:column;align-items:stretch;gap:9px">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-weight:700;font-size:16px;color:var(--w)">Teen<span style="color:var(--neon)">Job</span></span>
+        <div style="font-size:10px;color:var(--w30)" id="fc">1 תוצאות</div>
+      </div>
+      <button class="btn-icon" id="fav" onclick="goNav(&#39;s-prof&#39;)"><img src="data:image/jpeg;base64,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" style="width:100%;height:100%;border-radius:50%;object-fit:cover"></button>
+    </div>
+    <input class="inp" id="fq" placeholder="🔍 חפש משרה..." oninput="renderFeed()" style="font-size:13px;padding:10px 13px">
+    <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:2px" id="fcats"><button class="chip on" data-v="הכל">הכל</button><button class="chip" data-v="מסעדנות">מסעדנות</button><button class="chip" data-v="קמעונאות">קמעונאות</button><button class="chip" data-v="הדרכה">הדרכה</button><button class="chip" data-v="שירות לקוחות">שירות לקוחות</button><button class="chip" data-v="יצירה ועיצוב">יצירה ועיצוב</button><button class="chip" data-v="ספורט ופנאי">ספורט ופנאי</button><button class="chip" data-v="טכנולוגיה">טכנולוגיה</button><button class="chip" data-v="בייביסיטינג">בייביסיטינג</button><button class="chip" data-v="דוג ווקר">דוג ווקר</button><button class="chip" data-v="ניקיון וסדר">ניקיון וסדר</button><button class="chip" data-v="עבודות כפיים">עבודות כפיים</button><button class="chip" data-v="חקלאות וטבע">חקלאות וטבע</button><button class="chip" data-v="אדמיניסטרציה">אדמיניסטרציה</button></div>
+  </div>
+  <div class="sb" id="fl" style="display:flex;flex-direction:column;gap:10px"><div onclick="openJobM(&#39;9csKxxeEgjYl56QskoZX&#39;)" class="card" style="cursor:pointer">
+      <div style="display:flex;gap:11px;align-items:flex-start">
+        <div style="width:44px;height:44px;border-radius:var(--r-md);background:var(--bg3);border:2px solid var(--w30);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🏫</div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:3px">
+            <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:14px;font-weight:700;color:var(--w)">תסריטאי עוזר</span>
+            
+            <span class="sbadge sw">ממתין</span>
+          </div>
+          <div style="font-size:12px;color:var(--w50)">אברהם שלום לוי · רמת גן</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:11px;padding-top:11px;border-top:1px solid var(--w15)">
+        <span style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:16px;font-weight:800;color:var(--w)">₪90<span style="font-size:11px;font-weight:400;color:var(--w30)">/שעה</span></span>
+        <span style="font-size:11px;color:var(--w30)">⏱ עוד 2 יום</span>
+      </div>
+    </div></div>
+  <div class="bnav">
+    <button class="nb on" id="tn0" onclick="goNav(&#39;s-feed&#39;)"><span class="ni">🔍</span>חפש</button>
+    <button class="nb" id="tn1" onclick="goNav(&#39;s-apps&#39;)"><span class="ni">📋</span>מועמדויות<span id="adot" style="display:none;position:absolute;top:9px;right:16px;width:7px;height:7px;background:var(--danger);border-radius:50%"></span></button>
+    <button class="nb" id="tn3" onclick="goNav(&#39;s-prof&#39;)"><span class="ni">👤</span>פרופיל</button>
+  </div>
+</div>
+
+<!-- TEEN: APPS -->
+<div class="screen" id="s-apps">
+  <div class="topbar"><span style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:15px;font-weight:700;color:var(--w)">המועמדויות שלי</span></div>
+  <div class="sb" id="apl" style="display:flex;flex-direction:column;gap:10px"></div>
+  <div class="bnav">
+    <button class="nb on" id="tn10" onclick="goNav(&#39;s-feed&#39;)"><span class="ni">🔍</span>חפש</button>
+    <button class="nb" id="tn11" onclick="goNav(&#39;s-apps&#39;)"><span class="ni">📋</span>מועמדויות</button>
+    <button class="nb" id="tn12" onclick="goNav(&#39;s-msgs&#39;)"><span class="ni">💬</span>הודעות</button>
+    <button class="nb" id="tn13" onclick="goNav(&#39;s-prof&#39;)"><span class="ni">👤</span>פרופיל</button>
+  </div>
+</div>
+
+<!-- TEEN: MESSAGES -->
+<div class="screen" id="s-msgs">
+  <div class="topbar"><span style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:15px;font-weight:700;color:var(--w)">ההודעות שלי 💬</span></div>
+  <div class="sb" id="msgs-list" style="display:flex;flex-direction:column;gap:10px"></div>
+  <div class="bnav">
+    <button class="nb" onclick="goNav(&#39;s-feed&#39;)"><span class="ni">🔍</span>חפש</button>
+    <button class="nb" onclick="goNav(&#39;s-apps&#39;)"><span class="ni">📋</span>מועמדויות</button>
+    <button class="nb on" onclick="goNav(&#39;s-msgs&#39;)"><span class="ni">💬</span>הודעות</button>
+    <button class="nb" onclick="goNav(&#39;s-prof&#39;)"><span class="ni">👤</span>פרופיל</button>
+  </div>
+</div>
+
+<!-- TEEN: PROFILE -->
+<div class="screen" id="s-prof">
+  <div class="topbar"><span style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:15px;font-weight:700;color:var(--w)">הפרופיל שלי</span></div>
+  <div class="sb" id="profbody" style="display:flex;flex-direction:column;gap:13px"></div>
+  <div class="bnav">
+    <button class="nb" onclick="goNav(&#39;s-feed&#39;)"><span class="ni">🔍</span>חפש</button>
+    <button class="nb" onclick="goNav(&#39;s-apps&#39;)"><span class="ni">📋</span>מועמדויות</button>
+    <button class="nb" onclick="goNav(&#39;s-msgs&#39;)"><span class="ni">💬</span>הודעות</button>
+    <button class="nb on" onclick="goNav(&#39;s-prof&#39;)"><span class="ni">👤</span>פרופיל</button>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="screen" id="s-chat">
+  <div class="topbar">
+    <button class="back" id="chat-back">‹</button>
+    <div style="flex:1"><div style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:14px;font-weight:700;color:var(--w)" id="chat-title">צ'אט</div><div style="font-size:11px;color:var(--w30)" id="chat-sub"></div></div>
+    <div style="width:9px;height:9px;background:var(--neon);border-radius:50%;box-shadow:0 0 7px var(--neon)"></div>
+  </div>
+  <div class="chat-msgs" id="chat-msgs"></div>
+  <div class="chat-row">
+    <input class="chat-inp" id="chat-inp" placeholder="כתוב/י הודעה..." onkeydown="if(event.key===&#39;Enter&#39;)sendMsg()">
+    <button class="send-btn" onclick="sendMsg()">➤</button>
+  </div>
+</div>
+
+<!-- EMPLOYER: DASHBOARD -->
+<div class="screen" id="s-emp">
+  <div class="topbar" style="justify-content:space-between">
+    <div>
+      <div style="font-size:11px;color:var(--w30)">ברוך הבא,</div>
+      <div style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:15px;font-weight:700;color:var(--w)" id="eh-name">מעסיק</div>
+    </div>
+    <button class="btn-icon" id="eh-av" onclick="setETab(&#39;eprof&#39;)">מ</button>
+  </div>
+  <div style="display:flex;border-bottom:2px solid var(--w15);background:var(--bg1);flex-shrink:0">
+    <button class="etab on" id="et0" onclick="setETab(&#39;jobs&#39;)">משרות</button>
+    <button class="etab" id="et1" onclick="setETab(&#39;apps&#39;)">מועמדים</button>
+    <button class="etab" id="et2" onclick="setETab(&#39;chats&#39;)">צ'אטים</button>
+    <button class="etab" id="et3" onclick="setETab(&#39;rate&#39;)">דרג</button>
+  </div>
+  <div class="sb" id="etab" style="display:flex;flex-direction:column;gap:11px"></div>
+  <div class="bnav">
+    <button class="nb on" id="en0" onclick="setETab(&#39;jobs&#39;)"><span class="ni">🏠</span>ראשי</button>
+    <button class="nb" id="en1" onclick="setETab(&#39;apps&#39;)"><span class="ni">👥</span>מועמדים</button>
+    <button class="nb" id="en2" onclick="go(&#39;s-post&#39;)"><span class="ni">➕</span>פרסם</button>
+    <button class="nb" id="en3" onclick="setETab(&#39;eprof&#39;)"><span class="ni">👤</span>פרופיל</button>
+  </div>
+</div>
+
+<!-- POST JOB -->
+<div class="screen" id="s-post">
+  <div class="topbar"><button class="back" onclick="go(&#39;s-emp&#39;)">‹</button><span style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:15px;font-weight:700;color:var(--w)">פרסום משרה</span></div>
+  <div class="sb" style="display:flex;flex-direction:column;gap:13px">
+    <div><label class="lbl">שם המשרה *</label><input class="inp" id="pj-t" placeholder="מלצר/ית, קופאי/ת..."></div>
+    <div><label class="lbl">קטגוריה</label><select class="inp" id="pj-c" style="appearance:auto;color:var(--w);background:var(--bg3)"><option>מסעדנות</option><option>קמעונאות</option><option>הדרכה</option><option>שירות לקוחות</option><option>יצירה ועיצוב</option><option>ספורט ופנאי</option><option>טכנולוגיה</option><option>בייביסיטינג</option><option>דוג ווקר</option><option>ניקיון וסדר</option><option>עבודות כפיים</option><option>חקלאות וטבע</option><option>אדמיניסטרציה</option></select></div>
+    <div><label class="lbl">עיר</label><input class="inp" id="pj-ci" placeholder="תל אביב, ירושלים..."></div>
+    <div><label class="lbl">תיאור *</label><textarea class="txta" id="pj-d" style="height:74px" placeholder="תאר/י את המשרה..."></textarea></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+      <div><label class="lbl">₪/שעה *</label><input class="inp" id="pj-p" type="number" placeholder="40" min="25"></div>
+      <div><label class="lbl">שעות/שבוע *</label><input class="inp" id="pj-h" type="number" placeholder="15" min="1" max="40"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+      <div><label class="lbl">התחלה *</label><input class="inp" id="pj-s" type="date" style="color-scheme:dark"></div>
+      <div><label class="lbl">סיום *</label><input class="inp" id="pj-e" type="date" style="color-scheme:dark"></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-sm" id="pt-f" onclick="setJType(&#39;קבועה&#39;)" style="flex:1;padding:11px 8px">📅 קבועה</button>
+      <button class="btn btn-dim btn-sm" id="pt-s" onclick="setJType(&#39;חופש גדול&#39;)" style="flex:1;padding:11px 8px">☀️ חופש גדול</button>
+    </div>
+    <div id="pjerr" style="display:none;font-size:12px;color:var(--danger);font-family:&#39;Montserrat&#39;,sans-serif;font-weight:700"></div>
+    <button class="btn" onclick="submitJob()">פרסם משרה ✦</button>
+  </div>
+</div>
+
+
+<!-- MODALS -->
+<div id="m-job" class="modal" style="display:none" onclick="cM(&#39;m-job&#39;)"><div class="msheet" onclick="event.stopPropagation()" id="m-job-b"></div></div>
+<div id="m-rate" class="modal" style="display:none" onclick="cM(&#39;m-rate&#39;)"><div class="msheet" onclick="event.stopPropagation()" id="m-rate-b"></div></div>
+<div id="m-ok" class="modal" style="display:none">
+  <div class="msheet" style="text-align:center;padding:32px 18px 36px">
+    <div style="font-size:44px;margin-bottom:13px">🎉</div>
+    <div style="font-family:&#39;Montserrat&#39;,sans-serif;font-size:17px;font-weight:700;color:var(--w);margin-bottom:7px">המשרה פורסמה!</div>
+    <div style="font-size:13px;color:var(--w50);margin-bottom:24px">בני נוער יכולים לראות אותה עכשיו</div>
+    <button class="btn" onclick="cM(&#39;m-ok&#39;);go(&#39;s-emp&#39;);setETab(&#39;jobs&#39;)">חזרה לדשבורד</button>
+  </div>
+</div>
+</div>
+
+<!-- FIREBASE SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, onSnapshot, query, orderBy, serverTimestamp, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+// ── Firebase Config ──
+const firebaseConfig = {
+  apiKey: "AIzaSyBjIpjhM-9Ch9kp53Rp4-7maZ0znzGSdN4",
+  authDomain: "teenjob-a0e31.firebaseapp.com",
+  projectId: "teenjob-a0e31",
+  storageBucket: "teenjob-a0e31.firebasestorage.app",
+  messagingSenderId: "501127844476",
+  appId: "1:501127844476:web:6acf59b88f464ebb882ff9",
+  measurementId: "G-6Y9YX8JS1N"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+// ── Constants ──
+const CATS = ['הכל','מסעדנות','קמעונאות','הדרכה','שירות לקוחות','יצירה ועיצוב','ספורט ופנאי','טכנולוגיה','בייביסיטינג','דוג ווקר','ניקיון וסדר','עבודות כפיים','חקלאות וטבע','אדמיניסטרציה'];
+const LOGOS = {'מסעדנות':'🍽️','קמעונאות':'🛒','הדרכה':'🏫','שירות לקוחות':'📞','יצירה ועיצוב':'🎨','ספורט ופנאי':'⚽','טכנולוגיה':'💻','בייביסיטינג':'👶','דוג ווקר':'🐕','ניקיון וסדר':'🧹','עבודות כפיים':'🔨','חקלאות וטבע':'🌱','אדמיניסטרציה':'📁'};
+const TODAY = new Date(); TODAY.setHours(0,0,0,0);
+
+// ── State ──
+let S = {
+  mode: 'teen', selCat: 'הכל', jType: 'קבועה', empTab: 'jobs',
+  user: null,
+  jobs: [], apps: {}, chatCtx: null,
+  unsubChat: null,
+  unsubApps: null,   // real-time listener for teen applications
+  unsubJobs: null,   // real-time listener for new jobs
+  notifications: [], // local store {id, type, title, text, ts, read}
+  notifCounter: 0
+};
+
+// ── Helpers ──
+const fmt = d => { if(!d) return ''; if(typeof d === 'string' && d.includes('/')) return d; const dt = new Date(d); if(isNaN(dt)) return d; return `${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}/${dt.getFullYear()}`; };
+const parseD = s => { if(!s) return null; if(s.includes('-')) { const[y,m,d]=s.split('-'); return new Date(+y,+m-1,+d); } if(s.includes('/')) { const[d,m,y]=s.split('/'); return new Date(+y,+m-1,+d); } return new Date(s); };
+const ended = d => { const dt = parseD(d); return dt && dt <= TODAY; };
+const dLeft = d => { const dt = parseD(d); if(!dt) return null; return Math.ceil((dt - TODAY) / 864e5); };
+const avg2 = (a, b) => +((+a + +b) / 2).toFixed(1);
+const fmtTs = ts => { if(!ts) return ''; const d = ts.toDate ? ts.toDate() : new Date(ts); return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; };
+const chatId = (jId, aId) => `${jId}_${aId}`;
+
+// ── Navigation ──
+function go(s) {
+  document.querySelectorAll('#app > .screen').forEach(e => e.classList.remove('active'));
+  document.getElementById(s).classList.add('active');
+}
+
+function goNav(s) {
+  go(s);
+  const m = { 's-feed': 0, 's-apps': 1, 's-prof': 3 };
+  const t = m[s];
+  for(let i = 0; i < 4; i++) {
+    ['tn'+i, 'tn1'+i].forEach(id => { const e = document.getElementById(id); if(e) e.classList.toggle('on', i === t); });
+  }
+  if(s === 's-feed') renderFeed();
+  else if(s === 's-apps') renderApps();
+  else if(s === 's-prof') renderProf();
+}
+
+// ── Setup ──
+async function setupTeen() {
+  const n = document.getElementById('su-n').value.trim();
+  const a = document.getElementById('su-a').value;
+  const err = document.getElementById('su-err');
+  if(!n || !a) { err.style.display='block'; err.textContent='נא למלא שם וגיל'; return; }
+  err.style.display = 'none';
+  try {
+    const interests = [...document.querySelectorAll('#su-cats .chip.on')].map(c => c.dataset.v);
+    const minPay = +document.getElementById('su-pay').value;
+    const docRef = await addDoc(collection(db, 'users'), {
+      name: n, age: +a, bio: document.getElementById('su-b').value,
+      minPay, interests, type: 'teen', reviews: [], createdAt: serverTimestamp()
+    });
+    S.user = { id: docRef.id, name: n, type: 'teen', minPay, interests, age: +a };
+    await idbSet('tj_uid', docRef.id);
+    document.getElementById('fav').textContent = n[0];
+    await loadJobs();
+    goNav('s-feed');
+    setTimeout(() => startTeenListeners(), 1500);
+  } catch(e) { err.style.display='block'; err.textContent='שגיאה: '+e.message; }
+}
+
+async function setupEmp() {
+  const n = document.getElementById('eu-n').value.trim();
+  const err = document.getElementById('eu-err');
+  if(!n) { err.style.display='block'; err.textContent='נא למלא שם עסק'; return; }
+  err.style.display = 'none';
+  try {
+    const docRef = await addDoc(collection(db, 'users'), {
+      name: n, bio: document.getElementById('eu-b').value,
+      type: 'employer', createdAt: serverTimestamp()
+    });
+    S.user = { id: docRef.id, name: n, type: 'employer' };
+    S.mode = 'employer';
+    await idbSet('tj_uid', docRef.id);
+    document.getElementById('eh-name').textContent = n;
+    document.getElementById('eh-av').textContent = n[0];
+    await loadJobs();
+    go('s-emp');
+    setETab('jobs');
+  } catch(e) { err.style.display='block'; err.textContent='שגיאה: '+e.message; }
+}
+
+// ── Load Jobs ──
+async function loadJobs() {
+  const snap = await getDocs(collection(db, 'jobs'));
+  S.jobs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+// Jobs available in feed (exclude closed unless teen is the accepted one)
+function openJobs() {
+  return S.jobs.filter(j => {
+    if(j.status !== 'closed') return true;
+    // If teen is the accepted one, still show it in their apps
+    return j.acceptedTeenId === S.user?.id;
+  });
+}
+
+// ── Feed ──
+async function renderFeed() {
+  await loadJobs();
+  const q = (document.getElementById('fq') || {}).value?.toLowerCase() || '';
+  const mp = S.user?.minPay || 0;
+  const ints = S.user?.interests || [];
+  const cat = S.selCat;
+  // Only show open jobs in feed
+  let jobs = S.jobs.filter(j =>
+    j.status !== 'closed' &&
+    (!q || j.t.includes(q) || j.co.includes(q)) &&
+    (cat === 'הכל' || j.cat === cat) &&
+    +j.pay >= mp &&
+    (ints.length === 0 || ints.includes(j.cat))
+  );
+  jobs.sort((a, b) => ((ints.includes(b.cat)?2:0)+(+b.pay>=mp+10?1:0)) - ((ints.includes(a.cat)?2:0)+(+a.pay>=mp+10?1:0)));
+  const fc = document.getElementById('fc'); if(fc) fc.textContent = jobs.length + ' תוצאות';
+  const fl = document.getElementById('fl'); if(!fl) return;
+  if(!jobs.length) { fl.innerHTML = `<div class="es"><div class="es-icon">🔍</div><div class="es-t">אין משרות זמינות</div><div class="es-s">כאן יופיעו משרות כשמעסיקים יפרסמו</div></div>`; return; }
+  fl.innerHTML = jobs.map((j, i) => {
+    const st = S.apps[j.id];
+    const e = ended(j.end); const dl = dLeft(j.end);
+    const sLbl = {waiting:'ממתין',accepted:'התקבל',rejected:'לא התאים'};
+    const sCls = {waiting:'sw',accepted:'sa',rejected:'sr'};
+    return `<div onclick="openJobM('${j.id}')" class="card" style="cursor:pointer">
+      <div style="display:flex;gap:11px;align-items:flex-start">
+        <div style="width:44px;height:44px;border-radius:var(--r-md);background:var(--bg3);border:2px solid var(--w30);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${j.logo||'💼'}</div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:3px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--w)">${j.t}</span>
+            ${i===0&&ints.length>0?`<span class="badge" style="background:rgba(57,255,110,.12);border:1.5px solid var(--neon);color:var(--neon)">✦ מתאים</span>`:''}
+            ${st?`<span class="sbadge ${sCls[st]}">${sLbl[st]}</span>`:''}
+          </div>
+          <div style="font-size:12px;color:var(--w50)">${j.co}${j.city?' · '+j.city:''}</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:11px;padding-top:11px;border-top:1px solid var(--w15)">
+        <span style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--w)">₪${j.pay}<span style="font-size:11px;font-weight:400;color:var(--w30)">/שעה</span></span>
+        <span style="font-size:11px;color:${e?'var(--danger)':'var(--w30)'}">${e?'🔴 הסתיימה':(dl!=null?`⏱ עוד ${dl} יום`:'')}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openJobM(id) {
+  const j = S.jobs.find(x => x.id === id); if(!j) return;
+  const st = S.apps[id]; const e = ended(j.end); const dl = dLeft(j.end);
+  document.getElementById('m-job-b').innerHTML = `
+    <div class="mhdl"></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:13px">
+      <div style="width:50px;height:50px;border-radius:var(--r-md);background:var(--bg3);border:2px solid var(--w30);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${j.logo||'💼'}</div>
+      <div><div style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:var(--w)">${j.t}</div><div style="font-size:12px;color:var(--w50)">${j.co}${j.city?' · '+j.city:''}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:13px">
+      <div style="background:var(--bg3);border:2px solid var(--w30);border-radius:var(--r-md);padding:9px;text-align:center"><div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;color:var(--w)">₪${j.pay}</div><div style="font-size:10px;color:var(--w30)">לשעה</div></div>
+      <div style="background:var(--bg3);border:2px solid var(--w30);border-radius:var(--r-md);padding:9px;text-align:center"><div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;color:var(--w)">${j.hours}</div><div style="font-size:10px;color:var(--w30)">שעות/שבוע</div></div>
+      <div style="background:var(--bg3);border:2px solid ${e?'rgba(255,77,109,.5)':'var(--w30)'};border-radius:var(--r-md);padding:9px;text-align:center;grid-column:span 2">
+        <div style="font-size:11px;font-weight:700;color:${e?'var(--danger)':'var(--w)'};font-family:'Montserrat',sans-serif">${e?'הסתיימה':'עד'} ${fmt(j.end)}</div>
+        <div style="font-size:9px;color:var(--w30)">${dl!=null?`עוד ${dl} ימים`:''}</div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--w50);line-height:1.7;margin-bottom:13px">${j.desc}</div>
+    <div id="az">${applyZone(id, st, j.end, j.t, j.co)}</div>`;
+  document.getElementById('m-job').style.display = 'flex';
+}
+
+function applyZone(id, st, end, jTitle, jCo) {
+  const e = ended(end); const dl = dLeft(end);
+  if(!st) return `<button onclick="applyJob('${id}')" class="btn">הגש/י מועמדות</button>`;
+  if(st === 'waiting') return `<div class="sbadge sw" style="display:block;text-align:center;padding:12px;font-size:12px;border-radius:var(--r-md)">⏳ ממתין לתגובת המעסיק</div>`;
+  if(st === 'rejected') return `<div class="sbadge sr" style="display:block;text-align:center;padding:12px;font-size:12px;border-radius:var(--r-md)">לא התאים כרגע</div>`;
+  if(st === 'accepted') {
+    const chatBtn = `<button onclick="cM('m-job');openChat('${id}','${S.user.id}','${jTitle}','${jCo}','s-feed')" class="btn btn-chat" style="margin-top:9px">💬 פתח צ'אט עם המעסיק</button>`;
+    if(e) return `<div style="display:flex;flex-direction:column;gap:9px"><div class="sbadge sa" style="display:block;text-align:center;padding:12px;font-size:12px;border-radius:var(--r-md)">🎉 התקבלת! העבודה הסתיימה</div><button onclick="cM('m-job');openRateM('emp','${id}')" class="reveal-btn" style="margin-top:0">דרג/י את המעסיק וגלה/י את הציון שלך ⭐</button>${chatBtn}</div>`;
+    return `<div style="display:flex;flex-direction:column;gap:9px"><div class="sbadge sa" style="display:block;text-align:center;padding:12px;font-size:12px;border-radius:var(--r-md)">🎉 התקבלת!</div><div class="lockbox"><span>🔒</span><div><div style="font-size:12px;font-weight:700;color:var(--w);font-family:'Montserrat',sans-serif">הדירוג יפתח ב-${fmt(end)}</div><div style="font-size:10px;color:var(--w30)">${dl!=null?`עוד ${dl} ימים`:''}</div></div></div>${chatBtn}</div>`;
+  }
+  return '';
+}
+
+async function applyJob(id) {
+  if(!S.user) return;
+  S.apps[id] = 'waiting';
+  await addDoc(collection(db, 'applications'), {
+    jobId: id, teenId: S.user.id, teenName: S.user.name,
+    teenPhoto: S.user.photoURL || '',
+    status: 'waiting', createdAt: serverTimestamp()
+  });
+  const j = S.jobs.find(x => x.id === id);
+  document.getElementById('az').innerHTML = applyZone(id, 'waiting', j?.end, j?.t, j?.co);
+  const dot = document.getElementById('adot'); if(dot) dot.style.display = 'block';
+}
+
+async function renderApps() {
+  if(!S.user) return;
+  const snap = await getDocs(query(collection(db, 'applications'), where('teenId','==',S.user.id)));
+  const entries = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const el = document.getElementById('apl');
+
+  // Filter out rejected_closed silently (job was taken by someone else)
+  const visible = entries.filter(a => a.status !== 'rejected_closed');
+
+  if(!visible.length) {
+    el.innerHTML = `<div class="es"><div class="es-icon">📋</div><div class="es-t">אין מועמדויות עדיין</div><div class="es-s">הגש/י מועמדות דרך "חפש"</div><button class="btn" onclick="goNav('s-feed')" style="max-width:220px">חפש משרות</button></div>`;
+    return;
+  }
+
+  const sCls = {waiting:'sw', accepted:'sa', rejected:'sr'};
+  const sLbl = {waiting:'ממתין', accepted:'✓ התקבלת!', rejected:'לא התאים'};
+
+  el.innerHTML = visible.map(app => {
+    const j = S.jobs.find(x => x.id === app.jobId);
+    if(!j) return '';
+    const e = ended(j.end); const dl = dLeft(j.end);
+    const isClosed = j.status === 'closed';
+    let extra = '';
+
+    if(app.status === 'accepted') {
+      const chatBtn = `<button onclick="openChat('${j.id}','${S.user.id}','${j.t}','${j.co}','s-apps')" class="btn btn-chat btn-sm" style="margin-top:9px;width:100%;padding:10px">💬 צ'אט עם ${j.co}</button>`;
+      if(e) {
+        extra = `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+          <button onclick="openRateM('emp','${j.id}')" class="reveal-btn" style="margin-top:0">דרג/י את ${j.co} וגלה/י מה כתבו עליך ⭐</button>
+          ${chatBtn}
+        </div>`;
+      } else {
+        extra = `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px"><div class="lockbox"><span>🔒</span><div><div style="font-size:12px;font-weight:700;color:var(--w)">הדירוג יפתח ב-${fmt(j.end)}</div></div></div>${chatBtn}</div>`;
+      }
+    }
+
+    const closedBadge = isClosed && app.status !== 'accepted'
+      ? `<span class="job-status-closed">🔴 נסגרה</span>` : '';
+
+    return `<div class="card-s">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:38px;height:38px;border-radius:var(--r-md);background:var(--bg3);border:2px solid var(--w30);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">${j.logo||'💼'}</div>
+        <div style="flex:1">
+          <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--w)">${j.t}</div>
+          <div style="font-size:12px;color:var(--w50)">${j.co}${j.city?' · '+j.city:''}</div>
+          ${closedBadge}
+        </div>
+        <span class="sbadge ${sCls[app.status]||'sw'}">${sLbl[app.status]||''}</span>
+      </div>
+      ${extra}
+    </div>`;
+  }).join('');
+}
+
+async function renderMsgsList() {
+  if(!S.user) return;
+  const snap = await getDocs(collection(db, 'chats'));
+  const myChats = snap.docs.filter(d => d.id.includes(S.user.id)).map(d => ({ id: d.id, ...d.data() }));
+  const el = document.getElementById('msgs-list');
+  if(!myChats.length) { el.innerHTML = `<div class="es"><div class="es-icon">💬</div><div class="es-t">אין הודעות עדיין</div><div class="es-s">הודעות יופיעו לאחר שמעסיק יאשר אותך</div></div>`; return; }
+  el.innerHTML = myChats.map(chat => {
+    const parts = chat.id.split('_');
+    const jId = parts[0];
+    const j = S.jobs.find(x => x.id === jId); if(!j) return '';
+    const last = chat.lastMsg || {};
+    return `<div class="card" onclick="openChat('${jId}','${S.user.id}','${j.t}','${j.co}','s-msgs')" style="cursor:pointer">
+      <div style="display:flex;align-items:center;gap:11px">
+        <div style="width:44px;height:44px;border-radius:50%;background:rgba(57,255,110,.12);border:1.5px solid rgba(57,255,110,.3);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">${j.logo||'💼'}</div>
+        <div style="flex:1;min-width:0"><div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--w)">${j.co}</div><div style="font-size:11px;color:var(--w30)">${j.t}</div><div style="font-size:12px;color:var(--w50);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${last.text||'לחץ לפתיחת שיחה'}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderProf() {
+  if(!S.user) return;
+  const n = S.user.name || '?';
+  const bio = S.user.bio || '';
+  const photo = S.user.photoURL || '';
+  const interests = S.user.interests || [];
+  document.getElementById('profbody').innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:9px;padding:14px 0 8px">
+      <div class="avatar-wrap" onclick="document.getElementById('prof-photo-inp').click()">
+        <div class="avatar-circle" id="prof-avatar-circle">
+          ${photo ? `<img src="${photo}" alt="פרופיל">` : `<span>${n[0]}</span>`}
+        </div>
+        <div class="avatar-edit">📷</div>
+        <input type="file" id="prof-photo-inp" accept="image/*" onchange="uploadProfilePhoto(this)">
+      </div>
+      <div class="upload-progress" id="upload-prog"><div class="upload-progress-bar" id="upload-prog-bar"></div></div>
+      <div style="font-size:11px;color:var(--w30)">לחץ/י על התמונה לשינוי</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:var(--w)">${n}</div>
+      ${bio ? `<div style="font-size:13px;color:var(--w50);text-align:center;line-height:1.6">${bio}</div>` : ''}
+    </div>
+    <div class="card-s">
+      <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--w50);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">עריכת פרופיל</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div><label class="lbl">שם מלא</label><input class="inp" id="p-name" value="${n}"></div>
+        <div><label class="lbl">גיל</label><input class="inp" id="p-age" type="number" min="13" max="18" value="${S.user.age||''}" placeholder="13–18"></div>
+        <div><label class="lbl">Bio — קצת עליי</label><textarea class="txta" id="p-bio" style="height:72px" placeholder="כישורים, זמינות, מה אני מחפש/ת...">${bio}</textarea></div>
+        <div>
+          <label class="lbl">שכר מינימום — <span id="p-pay-lbl" style="color:var(--w);font-weight:800">₪${S.user.minPay||35}</span>/שעה</label>
+          <input type="range" min="25" max="70" step="1" value="${S.user.minPay||35}" id="p-pay" style="width:100%;accent-color:var(--w);margin-top:8px" oninput="document.getElementById('p-pay-lbl').textContent='₪'+this.value">
+        </div>
+        <div>
+          <label class="lbl">תחומי עניין</label>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:5px" id="p-cats"></div>
+        </div>
+        <button class="btn" onclick="saveProf()">שמור שינויים ✓</button>
+      </div>
+    </div>
+    <div id="prof-ratings-section"></div>
+    <div style="padding-top:4px">
+      <button class="btn btn-no btn-sm" onclick="logout()" style="width:auto;padding:10px 20px">התנתק/י</button>
+    </div>`;
+
+  // Load blind ratings for this teen
+  loadTeenBlindRatings();
+
+  // render interest chips in profile
+  const pc = document.getElementById('p-cats');
+  CATS_LIST.forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (interests.includes(cat) ? ' on' : '');
+    b.dataset.v = cat; b.textContent = cat;
+    b.onclick = () => b.classList.toggle('on');
+    pc.appendChild(b);
+  });
+}
+
+
+async function uploadProfilePhoto(input) {
+  const file = input.files[0]; if(!file || !S.user) return;
+  const prog = document.getElementById('upload-prog');
+  const bar = document.getElementById('upload-prog-bar');
+  if(prog) prog.style.display = 'block';
+  if(bar) bar.style.width = '0%';
+  try {
+    // Convert to base64 and store in Firestore (simple approach without Storage SDK)
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      if(bar) bar.style.width = '50%';
+      const base64 = e.target.result;
+      // Resize image first
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+      img.onload = async () => {
+        const size = 200;
+        canvas.width = size; canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        // crop to square
+        const min = Math.min(img.width, img.height);
+        const sx = (img.width - min) / 2;
+        const sy = (img.height - min) / 2;
+        ctx.drawImage(img, sx, sy, min, min, 0, 0, size, size);
+        const resized = canvas.toDataURL('image/jpeg', 0.7);
+        if(bar) bar.style.width = '80%';
+        await updateDoc(doc(db, 'users', S.user.id), { photoURL: resized });
+        S.user.photoURL = resized;
+        if(bar) bar.style.width = '100%';
+        // update avatar in UI
+        const circle = document.getElementById('prof-avatar-circle');
+        if(circle) circle.innerHTML = `<img src="${resized}" alt="פרופיל">`;
+        const fav = document.getElementById('fav');
+        if(fav) { fav.innerHTML = `<img src="${resized}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; }
+        setTimeout(() => { if(prog) prog.style.display='none'; }, 800);
+      };
+      img.src = base64;
+    };
+    reader.readAsDataURL(file);
+  } catch(err) {
+    alert('שגיאה בהעלאת תמונה: ' + err.message);
+    if(prog) prog.style.display = 'none';
+  }
+}
+window.uploadProfilePhoto = uploadProfilePhoto;
+
+async function uploadEmpPhoto(input) {
+  const file = input.files[0]; if(!file || !S.user) return;
+  const prog = document.getElementById('emp-upload-prog');
+  const bar = document.getElementById('emp-upload-prog-bar');
+  if(prog) prog.style.display = 'block';
+  if(bar) bar.style.width = '0%';
+  try {
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      if(bar) bar.style.width = '50%';
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+      img.onload = async () => {
+        const size = 200;
+        canvas.width = size; canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        const min = Math.min(img.width, img.height);
+        const sx = (img.width - min) / 2;
+        const sy = (img.height - min) / 2;
+        ctx.drawImage(img, sx, sy, min, min, 0, 0, size, size);
+        const resized = canvas.toDataURL('image/jpeg', 0.7);
+        if(bar) bar.style.width = '80%';
+        await updateDoc(doc(db, 'users', S.user.id), { photoURL: resized });
+        S.user.photoURL = resized;
+        if(bar) bar.style.width = '100%';
+        // Update avatar in topbar and profile
+        const circle = document.getElementById('emp-avatar-circle');
+        if(circle) circle.innerHTML = `<img src="${resized}" alt="פרופיל">`;
+        const ehAv = document.getElementById('eh-av');
+        if(ehAv) ehAv.innerHTML = `<img src="${resized}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
+        setTimeout(() => { if(prog) prog.style.display='none'; }, 800);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  } catch(err) {
+    alert('שגיאה בהעלאת תמונה: ' + err.message);
+    if(prog) prog.style.display = 'none';
+  }
+}
+window.uploadEmpPhoto = uploadEmpPhoto;
+
+async function saveProf() {
+  if(!S.user) return;
+  const name = document.getElementById('p-name')?.value.trim() || S.user.name;
+  const age = +document.getElementById('p-age')?.value || S.user.age || '';
+  const bio = document.getElementById('p-bio')?.value || '';
+  const minPay = +document.getElementById('p-pay')?.value || 35;
+  const interests = [...document.querySelectorAll('#p-cats .chip.on')].map(c => c.dataset.v);
+  await updateDoc(doc(db, 'users', S.user.id), { name, bio, minPay, interests, age });
+  S.user.name = name; S.user.bio = bio; S.user.minPay = minPay; S.user.interests = interests; S.user.age = age;
+  const fav = document.getElementById('fav');
+  if(fav && !S.user.photoURL) fav.textContent = name[0];
+  renderProf();
+  alert('הפרופיל עודכן! ✓');
+}
+window.saveProf = saveProf;
+
+
+function openChat(jId, teenId, jTitle, other, backScreen) {
+  const cid = chatId(jId, teenId);
+  S.chatCtx = { jId, teenId, cid, back: backScreen };
+  document.getElementById('chat-title').textContent = '💬 ' + other;
+  document.getElementById('chat-sub').textContent = jTitle;
+  document.getElementById('chat-back').onclick = () => { if(S.unsubChat) S.unsubChat(); if(S.mode==='employer') { go('s-emp'); setETab('chats'); } else goNav(backScreen||'s-feed'); };
+  if(S.unsubChat) S.unsubChat();
+  const msgsEl = document.getElementById('chat-msgs');
+  msgsEl.innerHTML = '';
+  S.unsubChat = onSnapshot(
+    query(collection(db, 'chats', cid, 'messages'), orderBy('ts')),
+    snap => {
+      const me = S.mode === 'employer' ? 'employer' : 'teen';
+      msgsEl.innerHTML = snap.docs.length
+        ? snap.docs.map(d => { const m = d.data(); return `<div style="display:flex;flex-direction:column;align-items:${m.sender===me?'flex-end':'flex-start'}"><div class="msg-bubble ${m.sender===me?'msg-me':'msg-other'}">${m.text}<div class="msg-time">${fmtTs(m.ts)}</div></div></div>`; }).join('')
+        : `<div style="text-align:center;padding:40px;color:var(--w30);font-size:13px">התחל/י את השיחה! 👋</div>`;
+      setTimeout(() => { msgsEl.scrollTop = msgsEl.scrollHeight; }, 50);
+    }
+  );
+  go('s-chat');
+}
+
+async function sendMsg() {
+  const inp = document.getElementById('chat-inp');
+  const txt = (inp.value || '').trim(); if(!txt || !S.chatCtx) return;
+  const { cid } = S.chatCtx;
+  const sender = S.mode === 'employer' ? 'employer' : 'teen';
+  inp.value = '';
+  await addDoc(collection(db, 'chats', cid, 'messages'), { sender, text: txt, ts: serverTimestamp() });
+  await updateDoc(doc(db, 'chats', cid), { lastMsg: { text: txt, sender }, updatedAt: serverTimestamp() }).catch(async () => {
+    await addDoc(collection(db, 'chats'), { id: cid, lastMsg: { text: txt, sender } });
+  });
+}
+window.sendMsg = sendMsg;
+
+// ── EMPLOYER ──
+async function setETab(t) {
+  S.empTab = t;
+  ['jobs','apps','chats','rate','eprof'].forEach((id,i) => {
+    const el = document.getElementById('et'+i); if(el) el.classList.toggle('on', id===t);
+    const mn = document.getElementById('en'+i); if(mn) mn.classList.toggle('on', id===t);
+  });
+  go('s-emp');
+  const body = document.getElementById('etab');
+  await loadJobs();
+
+  if(t === 'jobs') {
+    const myJobs = S.jobs.filter(j => j.empId === S.user.id);
+    if(!myJobs.length) { body.innerHTML = `<div class="es"><div class="es-icon">📋</div><div class="es-t">אין משרות פעילות</div><div class="es-s">פרסם את המשרה הראשונה שלך</div><button class="btn" onclick="go('s-post')" style="max-width:220px">+ פרסם משרה</button></div>`; return; }
+    body.innerHTML = `<button class="btn" onclick="go('s-post')" style="margin-bottom:4px">+ פרסם משרה חדשה</button>` + myJobs.map(j => {
+      const e = ended(j.end); const dl = dLeft(j.end);
+      return `<div class="card-s"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div><div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--w)">${j.t}</div><div style="font-size:12px;color:var(--w50)">₪${j.pay}/שעה</div></div><span class="badge" style="background:var(--bg3);border:1.5px solid var(--w30);color:${e?'var(--danger)':'var(--w)'}">${e?'הסתיים':'פעיל'}</span></div><div style="font-size:11px;color:var(--w30)">עד ${fmt(j.end)}</div></div>`;
+    }).join('');
+
+  } else if(t === 'apps') {
+    const myJobs = S.jobs.filter(j => j.empId === S.user.id);
+    if(!myJobs.length) { body.innerHTML = `<div class="es"><div class="es-icon">📭</div><div class="es-t">אין מועמדים עדיין</div><div class="es-s">פרסם משרה תחילה</div></div>`; return; }
+    const snap = await getDocs(query(collection(db, 'applications'), where('jobId','in', myJobs.map(j=>j.id))));
+    const apps = snap.docs.map(d => ({ appId: d.id, ...d.data() }));
+    if(!apps.length) { body.innerHTML = `<div class="es"><div class="es-icon">📭</div><div class="es-t">אין מועמדים עדיין</div><div class="es-s">כשמישהו יגיש מועמדות, הוא יופיע כאן</div></div>`; return; }
+    body.innerHTML = apps.map(app => {
+      const j = myJobs.find(x => x.id === app.jobId); if(!j) return '';
+      const isClosed = j.status === 'closed';
+      const sLbl = {waiting:'ממתין', accepted:'✓ אושר', rejected:'נדחה', rejected_closed:'נסגרה'};
+      const sCls = {waiting:'sw', accepted:'sa', rejected:'sr', rejected_closed:'sr'};
+      const e = ended(j.end);
+
+      let action = '';
+      if(app.status === 'waiting' && !isClosed) {
+        // Only show approve/reject if job is still open
+        action = `<div style="display:flex;gap:8px;margin-top:10px">
+          <button onclick="empDecide('${app.appId}','${app.jobId}','${app.teenId}','accepted')" class="btn btn-yes btn-sm" style="flex:1;padding:10px">✓ אשר</button>
+          <button onclick="empDecide('${app.appId}','${app.jobId}','${app.teenId}','rejected')" class="btn btn-no btn-sm" style="flex:1;padding:10px">✗ דחה</button>
+        </div>`;
+      } else if(app.status === 'waiting' && isClosed) {
+        action = `<div style="margin-top:8px;font-size:11px;color:var(--danger);font-family:Montserrat,sans-serif;font-weight:700">🔴 המשרה נסגרה — נבחר מועמד אחר</div>`;
+      } else if(app.status === 'accepted') {
+        const chatBtn = `<button onclick="openChat('${j.id}','${app.teenId}','${j.t}','${app.teenName}','s-emp')" class="btn btn-chat btn-sm" style="width:100%;margin-top:8px;padding:10px">💬 צ'אט עם ${app.teenName}</button>`;
+        if(e) {
+          // Job ended → show rate-to-reveal button
+          action = `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+            <button onclick="openRateM('teen','${j.id}','${app.teenId}')" class="reveal-btn" style="margin-top:0">דרג/י את ${app.teenName} וגלה/י את הציון שלו ⭐</button>
+            ${chatBtn}
+          </div>`;
+        } else {
+          action = `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px"><div class="lockbox"><span>🔒</span><div><div style="font-size:12px;font-weight:700;color:var(--w)">הדירוג יפתח ב-${fmt(j.end)}</div></div></div>${chatBtn}</div>`;
+        }
+      }
+
+      const closedTag = isClosed ? `<span class="job-status-closed" style="margin-right:6px">🔴 נסגרה</span>` : '';
+      return `<div class="card-s">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:7px;flex-wrap:wrap">
+          <span style="font-size:10px;font-weight:700;color:var(--w30);font-family:Montserrat,sans-serif;text-transform:uppercase">משרה: ${j.t}</span>
+          ${closedTag}
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="btn-icon" style="pointer-events:none;overflow:hidden">${app.teenPhoto?`<img src="${app.teenPhoto}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`:(app.teenName||'?')[0]}</div>
+          <div style="flex:1"><div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--w)">${app.teenName}</div></div>
+          <span class="sbadge ${sCls[app.status]||'sw'}">${sLbl[app.status]||''}</span>
+        </div>
+        ${action}
+      </div>`;
+    }).join('');
+
+  } else if(t === 'chats') {
+    const myJobs = S.jobs.filter(j => j.empId === S.user.id);
+    const snap = await getDocs(collection(db, 'chats'));
+    const myChats = snap.docs.filter(d => myJobs.some(j => d.id.startsWith(j.id)));
+    if(!myChats.length) { body.innerHTML = `<div class="es"><div class="es-icon">💬</div><div class="es-t">אין צ'אטים</div><div class="es-s">צ'אטים ייפתחו לאחר אישור מועמדים</div></div>`; return; }
+    body.innerHTML = myChats.map(d => {
+      const chat = d.data(); const parts = d.id.split('_');
+      const j = myJobs.find(x => x.id === parts[0]); if(!j) return '';
+      const last = chat.lastMsg || {};
+      return `<div class="card" onclick="openChat('${j.id}','${parts[1]}','${j.t}','${j.t}','s-emp')" style="cursor:pointer"><div style="display:flex;align-items:center;gap:10px"><div class="btn-icon" style="pointer-events:none">💬</div><div style="flex:1;min-width:0"><div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--w)">${j.t}</div><div style="font-size:12px;color:var(--w50);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${last.text||'לחץ לפתיחת שיחה'}</div></div></div></div>`;
+    }).join('');
+
+  } else if(t === 'eprof') {
+    const photo = S.user.photoURL || '';
+    body.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;gap:9px;padding:14px 0 8px">
+        <div class="avatar-wrap" onclick="document.getElementById('emp-photo-inp').click()">
+          <div class="avatar-circle" id="emp-avatar-circle">
+            ${photo ? `<img src="${photo}" alt="פרופיל">` : `<span>${(S.user.name||'מ')[0]}</span>`}
+          </div>
+          <div class="avatar-edit">📷</div>
+          <input type="file" id="emp-photo-inp" accept="image/*" onchange="uploadEmpPhoto(this)">
+        </div>
+        <div class="upload-progress" id="emp-upload-prog"><div class="upload-progress-bar" id="emp-upload-prog-bar"></div></div>
+        <div style="font-size:11px;color:var(--w30)">לחץ/י על התמונה לשינוי</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:var(--w)">${S.user.name}</div>
+      </div>`;
+    loadEmpBlindRatings(body);
+    body.innerHTML += `<button class="btn btn-no btn-sm" onclick="logout()" style="width:auto;padding:10px 20px;margin-top:8px">התנתק/י</button>`;
+  }
+}
+window.setETab = setETab;
+
+
+// ── NOTIFICATION SYSTEM ──────────────────────────────────────────────────────
+
+function showNotif(type, title, text, duration=5000) {
+  const container = document.getElementById('notif-container');
+  if(!container) return;
+  const id = 'n' + Date.now();
+  const icons = { accepted:'🎉', newjob:'✨', rejected:'😔', info:'ℹ️' };
+  const barColors = { accepted:'neon', newjob:'cyan', rejected:'danger', info:'neon' };
+  const el = document.createElement('div');
+  el.className = 'notif notif-' + (type==='newjob'?'newjob':type==='rejected'?'rejected':'accepted');
+  el.id = id;
+  el.innerHTML = `
+    <div class="notif-icon">${icons[type]||'🔔'}</div>
+    <div class="notif-body">
+      <div class="notif-title">${title}</div>
+      <div class="notif-text">${text}</div>
+      <div class="notif-bar notif-bar-${barColors[type]||'neon'}"></div>
+    </div>
+    <button class="notif-close" onclick="dismissNotif('${id}')">✕</button>`;
+  container.prepend(el);
+  // store in local list
+  S.notifications.unshift({ id, type, title, text, ts: Date.now(), read: false });
+  updateBellDot();
+  setTimeout(() => dismissNotif(id), duration);
+}
+
+function dismissNotif(id) {
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.style.animation = 'none';
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(-10px) scale(.96)';
+  el.style.transition = 'all .25s';
+  setTimeout(() => el.remove(), 250);
+}
+
+function updateBellDot() {
+  // Bell dot removed from UI — notifications are popup-only
+}
+
+function renderNotifsList() {} // no notifications screen
+function clearAllNotifs() { S.notifications = []; }
+window.clearAllNotifs = clearAllNotifs;
+
+// ── REAL-TIME LISTENERS ───────────────────────────────────────────────────────
+
+function startTeenListeners() {
+  if(!S.user || S.user.type !== 'teen') return;
+
+  // ── Listener 1: מועמדויות ──
+  if(S.unsubApps) S.unsubApps();
+  const appsQ = query(collection(db, 'applications'), where('teenId','==',S.user.id));
+  let appsInitialDone = false; // flag: האם הטעינה הראשונית הסתיימה?
+
+  S.unsubApps = onSnapshot(appsQ, snap => {
+    if(!appsInitialDone) {
+      // טעינה ראשונית — רק עדכן state, אל תציג התראות
+      snap.docs.forEach(d => { S.apps[d.data().jobId] = d.data().status; });
+      appsInitialDone = true;
+      return;
+    }
+    // שינויים אמיתיים בלבד (אחרי הטעינה)
+    snap.docChanges().forEach(change => {
+      if(change.type !== 'modified') return; // רק modified = שינוי סטטוס אמיתי
+      const data = change.doc.data();
+      const prevStatus = S.apps[data.jobId];
+      const newStatus = data.status;
+      if(prevStatus === newStatus) return; // אין שינוי
+      S.apps[data.jobId] = newStatus;
+      const jobName = data.jobTitle || S.jobs.find(j=>j.id===data.jobId)?.t || 'משרה';
+      const empName = data.empName || S.jobs.find(j=>j.id===data.jobId)?.co || 'המעסיק';
+      if(newStatus === 'accepted') {
+        showNotif('accepted', 'מזל טוב! 🎉 התקבלת!', `התקבלת לעבודה: "${jobName}" ב${empName}`);
+        if(document.getElementById('s-apps')?.classList.contains('active')) renderApps();
+      } else if(newStatus === 'rejected') {
+        showNotif('rejected', 'עדכון מועמדות', `המועמדות ל"${jobName}" לא אושרה הפעם`);
+        if(document.getElementById('s-apps')?.classList.contains('active')) renderApps();
+      }
+    });
+  });
+
+  // ── Listener 2: משרות חדשות ──
+  if(S.unsubJobs) S.unsubJobs();
+  const interests = S.user.interests || [];
+  let jobsInitialDone = false; // flag: האם הטעינה הראשונית הסתיימה?
+  const knownJobIds = new Set(S.jobs.map(j => j.id)); // IDs שכבר ידועים מטעינה
+
+  S.unsubJobs = onSnapshot(collection(db, 'jobs'), snap => {
+    if(!jobsInitialDone) {
+      // טעינה ראשונית — רק עדכן state
+      snap.docs.forEach(d => knownJobIds.add(d.id));
+      jobsInitialDone = true;
+      return;
+    }
+    // שינויים אמיתיים — רק 'added' שלא היו קיימים
+    snap.docChanges().forEach(change => {
+      if(change.type !== 'added') return;
+      if(knownJobIds.has(change.doc.id)) return; // כבר ידוע, לא חדש
+      knownJobIds.add(change.doc.id);
+      const job = { id: change.doc.id, ...change.doc.data() };
+      S.jobs.push(job);
+      if(interests.length === 0 || interests.includes(job.cat)) {
+        showNotif('newjob', 'משרה חדשה מתאימה לך! ✨', `"${job.t}" ב${job.co} · ₪${job.pay}/שעה`);
+        if(document.getElementById('s-feed')?.classList.contains('active')) renderFeed();
+      }
+    });
+  });
+}
+
+function stopTeenListeners() {
+  if(S.unsubApps) { S.unsubApps(); S.unsubApps = null; }
+  if(S.unsubJobs) { S.unsubJobs(); S.unsubJobs = null; }
+}
+
+async function empDecide(appId, jobId, teenId, decision) {
+  // Find job title for notification
+  const job = S.jobs.find(j => j.id === jobId);
+  const jobTitle = job?.t || 'משרה';
+  const empName = job?.co || S.user?.name || 'המעסיק';
+
+  // Update this application
+  await updateDoc(doc(db, 'applications', appId), {
+    status: decision,
+    jobTitle,
+    empName,
+    updatedAt: serverTimestamp()
+  });
+
+  if(decision === 'accepted') {
+    // 1. Close the job
+    await updateDoc(doc(db, 'jobs', jobId), { status: 'closed', acceptedTeenId: teenId });
+
+    // 2. Reject all other waiting applicants for this job
+    const allApps = await getDocs(query(collection(db, 'applications'), where('jobId','==',jobId)));
+    const batch_promises = [];
+    allApps.docs.forEach(d => {
+      if(d.id !== appId && d.data().status === 'waiting') {
+        batch_promises.push(updateDoc(doc(db, 'applications', d.id), {
+          status: 'rejected_closed',
+          jobTitle,
+          empName,
+          updatedAt: serverTimestamp()
+        }));
+      }
+    });
+    await Promise.all(batch_promises);
+
+    // 3. Open chat channel
+    const cid = chatId(jobId, teenId);
+    try { await updateDoc(doc(db, 'chats', cid), { active: true, jobTitle, teenId, empId: S.user?.id }); }
+    catch { await addDoc(collection(db, 'chats'), { jobId, teenId, empId: S.user?.id, active: true, jobTitle, lastMsg: {} }); }
+  }
+
+  // Reload jobs list to reflect closed status
+  await loadJobs();
+  setETab('apps');
+}
+window.empDecide = empDecide;
+
+// ── POST JOB ──
+let jType = 'קבועה';
+function setJType(t) {
+  jType = t;
+  const f = document.getElementById('pt-f'), s = document.getElementById('pt-s');
+  if(!f||!s) return;
+  f.className = 'btn btn-sm' + (t==='קבועה'?'':' btn-dim'); f.style.flex='1'; f.style.padding='11px 8px';
+  s.className = 'btn btn-sm' + (t!=='קבועה'?'':' btn-dim'); s.style.flex='1'; s.style.padding='11px 8px';
+}
+window.setJType = setJType;
+
+async function submitJob() {
+  const t = document.getElementById('pj-t')?.value.trim();
+  const d = document.getElementById('pj-d')?.value.trim();
+  const p = document.getElementById('pj-p')?.value;
+  const h = document.getElementById('pj-h')?.value;
+  const s = document.getElementById('pj-s')?.value;
+  const e = document.getElementById('pj-e')?.value;
+  const ci = document.getElementById('pj-ci')?.value.trim();
+  const err = document.getElementById('pjerr');
+  if(!t||!d||!p||!h||!s||!e) { err.style.display='block'; err.textContent='נא למלא את כל השדות *'; return; }
+  if(new Date(e) <= new Date(s)) { err.style.display='block'; err.textContent='תאריך סיום חייב להיות אחרי תאריך התחלה'; return; }
+  err.style.display = 'none';
+  const cat = document.getElementById('pj-c').value;
+  await addDoc(collection(db, 'jobs'), {
+    t, co: S.user.name, city: ci||'', cat, pay: +p, hours: +h,
+    type: jType, desc: d, start: s, end: e,
+    logo: LOGOS[cat]||'💼', empId: S.user.id,
+    status: 'open',
+    createdAt: serverTimestamp()
+  });
+  ['pj-t','pj-d','pj-p','pj-h','pj-s','pj-e','pj-ci'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('m-ok').style.display = 'flex';
+}
+window.submitJob = submitJob;
+
+// ── RATING ──
+let RC = { type:'', jId:'', r1:7, r2:7 };
+function openRateM(type, jId, aId) {
+  const j = S.jobs.find(x => x.id === jId); if(!j) return;
+  if(!ended(j.end)) { alert('הדירוג יפתח ב-' + fmt(j.end)); return; }
+  RC = { type, jId, aId: aId||null, r1:7, r2:7 };
+  const lbls = type==='emp' ? ['יחס מכבד','קשב והכוונה'] : ['השקעה בעבודה','רצינות ואחריות'];
+  const tname = type==='emp' ? j.co : 'העובד';
+  document.getElementById('m-rate-b').innerHTML = `
+    <div class="mhdl"></div>
+    <div style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:var(--w);margin-bottom:4px">דירוג ${tname}</div>
+    <div style="font-size:12px;color:var(--w30);margin-bottom:15px">${type==='emp'?'איך היה לעבוד שם?':'כמה עבד/ה אצלך?'}</div>
+    <div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;color:var(--w50)">${lbls[0]}</span><span id="rl1" style="font-size:12px;font-weight:800;color:var(--w);font-family:'Montserrat',sans-serif">7/10</span></div><div style="display:flex;gap:3px" id="sg1"></div></div>
+    <div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;color:var(--w50)">${lbls[1]}</span><span id="rl2" style="font-size:12px;font-weight:800;color:var(--w);font-family:'Montserrat',sans-serif">7/10</span></div><div style="display:flex;gap:3px" id="sg2"></div></div>
+    <div style="margin-bottom:14px"><label class="lbl">הסבר לדירוג (חובה) *</label><textarea class="txta" id="rt" style="height:74px" placeholder="כתוב/י לפחות משפט אחד..."></textarea><div id="rerr" style="display:none;font-size:11px;color:var(--danger);margin-top:4px;font-family:'Montserrat',sans-serif;font-weight:700">נא לכתוב לפחות משפט קצר</div></div>
+    <button class="btn" onclick="submitRate()">שלח דירוג ⭐</button>`;
+  renderSG(1,7); renderSG(2,7);
+  document.getElementById('m-rate').style.display = 'flex';
+}
+window.openRateM = openRateM;
+
+function renderSG(n, v) {
+  document.getElementById('sg'+n).innerHTML = Array.from({length:10},(_,i)=>i+1).map(x => {
+    const on = x<=v; let cls=''; if(on) cls = x>=8?'shi':x>=5?'smid':'slo';
+    return `<button class="starbtn${on?' '+cls:''}" onclick="setR(${n},${x})">${x}</button>`;
+  }).join('');
+}
+window.renderSG = renderSG;
+
+function setR(n, v) { RC['r'+n]=v; document.getElementById('rl'+n).textContent=v+'/10'; renderSG(n,v); }
+window.setR = setR;
+
+async function submitRate() {
+  const txt = (document.getElementById('rt').value||'').trim();
+  if(txt.length < 4) { document.getElementById('rerr').style.display='block'; return; }
+  document.getElementById('rerr').style.display = 'none';
+
+  const j = S.jobs.find(x => x.id === RC.jId);
+  const myScore = Math.round((RC.r1 + RC.r2) / 2);
+  const field = RC.type === 'emp' ? 'ratingFromTeen' : 'ratingFromEmployer';
+  const otherField = RC.type === 'emp' ? 'ratingFromEmployer' : 'ratingFromTeen';
+
+  // Find or create the blindRating doc (one per job+teen pair)
+  const blindId = RC.jId + '_' + (RC.type === 'emp' ? S.user.id : RC.aId || 'unknown');
+
+  // Check if the other side already rated
+  let otherRating = null;
+  try {
+    const { getDoc: gd } = await import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js');
+    const blindDoc = await gd(doc(db, 'blindRatings', blindId));
+    if(blindDoc.exists()) otherRating = blindDoc.data()[otherField] || null;
+  } catch(e) {}
+
+  // Save our rating
+  try {
+    const { setDoc: sd } = await import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js');
+    await sd(doc(db, 'blindRatings', blindId), {
+      jobId: RC.jId,
+      teenId: RC.type === 'emp' ? S.user.id : (RC.aId || ''),
+      empId: RC.type === 'emp' ? (j?.empId || '') : S.user.id,
+      [field]: { score: myScore, text: txt, authorName: S.user.name, ts: Date.now() }
+    }, { merge: true });
+  } catch(e) { console.error('save rating error', e); }
+
+  // Also save to reviews collection
+  await addDoc(collection(db, 'reviews'), {
+    jobId: RC.jId, blindId,
+    type: RC.type, score: myScore,
+    text: txt, authorId: S.user.id, authorName: S.user.name,
+    createdAt: serverTimestamp()
+  });
+
+  // Show result: reveal other side's rating if they already rated, else show locked
+  const rb = document.getElementById('m-rate-b');
+  if(otherRating) {
+    // Both sides rated → reveal immediately!
+    const otherName = RC.type === 'emp' ? (j?.co || 'המעסיק') : 'העובד';
+    rb.innerHTML = `
+      <div style="text-align:center;padding:24px 0">
+        <div style="font-size:14px;font-weight:700;color:var(--w50);font-family:Montserrat,sans-serif;margin-bottom:4px">הדירוג שלך נשמר!</div>
+        <div style="font-size:12px;color:var(--w30);margin-bottom:20px">עכשיו נחשף הדירוג שקיבלת מ${otherName}</div>
+        <div style="background:rgba(57,255,110,.08);border:2px solid var(--neon);border-radius:var(--r-lg);padding:20px;margin-bottom:16px">
+          <div style="font-size:12px;color:var(--w50);margin-bottom:8px">הציון שלך מ${otherName}</div>
+          <div class="blind-score-reveal">${otherRating.score}/10</div>
+          <div style="font-size:13px;color:var(--w80);margin-top:10px;line-height:1.6;font-style:italic">"${otherRating.text}"</div>
+        </div>
+        <button class="btn" style="max-width:170px;margin:0 auto" onclick="cM('m-rate')">סגור</button>
+      </div>`;
+    // Fire popup notification
+    showNotif('accepted', `הדירוג נחשף! ★${otherRating.score}`, `${otherName} דירג/ה אותך ${otherRating.score}/10`);
+  } else {
+    // Other side hasn't rated yet → locked until they rate
+    const otherName = RC.type === 'emp' ? (j?.co || 'המעסיק') : 'העובד';
+    rb.innerHTML = `
+      <div style="text-align:center;padding:24px 0">
+        <div style="font-size:42px;margin-bottom:12px">✅</div>
+        <div style="font-family:Montserrat,sans-serif;font-size:16px;font-weight:700;color:var(--w);margin-bottom:6px">הדירוג שלך נשמר!</div>
+        <div style="background:var(--bg3);border:1.5px solid var(--w30);border-radius:var(--r-lg);padding:16px;margin:16px 0;text-align:right">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span style="font-size:22px">🔒</span>
+            <div>
+              <div style="font-family:Montserrat,sans-serif;font-size:13px;font-weight:700;color:var(--w)">הדירוג שלך ממתין לחשיפה</div>
+              <div style="font-size:12px;color:var(--w50);margin-top:3px">ברגע ש${otherName} ידרג/ת אותך — שניכם תראו את הציונים בו-זמנית</div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:10px">
+            <div style="font-size:11px;color:var(--w30)">הדירוג שקיבלת</div>
+            <div class="blind-score-blur">??</div>
+          </div>
+        </div>
+        <button class="btn" style="max-width:170px;margin:0 auto" onclick="cM('m-rate')">סגור</button>
+      </div>`;
+  }
+}
+window.submitRate = submitRate;
+
+function cM(id) { document.getElementById(id).style.display = 'none'; }
+window.cM = cM;
+
+
+// ── BLIND RATING LOGIC ───────────────────────────────────────────────────────
+
+async function loadTeenBlindRatings() {
+  if(!S.user || S.user.type !== 'teen') return;
+  const sec = document.getElementById('prof-ratings-section');
+  if(!sec) return;
+  sec.innerHTML = '<div style="text-align:center;padding:14px;color:var(--w30);font-size:12px">טוען דירוגים...</div>';
+
+  try {
+    const snap = await getDocs(query(collection(db, 'blindRatings'), where('teenId','==',S.user.id)));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    if(!docs.length) {
+      sec.innerHTML = '';
+      return;
+    }
+
+    let html = '<div style="margin-top:4px">';
+    html += '<div style="font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;color:var(--w50);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">הדירוגים שלי</div>';
+
+    for(const d of docs) {
+      const job = S.jobs.find(j => j.id === d.jobId);
+      const jobName = job?.t || 'משרה';
+      const empName = job?.co || 'מעסיק';
+      const iGave = !!d.ratingFromTeen;      // teen rated employer
+      const iGot  = !!d.ratingFromEmployer;  // employer rated teen
+
+      if(!iGot && !iGave) continue; // nothing yet
+
+      if(iGot && iGave) {
+        // Both rated → show revealed rating
+        const score = d.ratingFromEmployer.score;
+        const txt = d.ratingFromEmployer.text;
+        html += `<div class="blind-card" style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--neon);font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:8px">⭐ ${empName} · ${jobName}</div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="blind-score-reveal" style="font-size:32px">${score}<span style="font-size:14px;font-weight:600;color:var(--w50)">/10</span></div>
+            <div style="flex:1;font-size:12px;color:var(--w80);line-height:1.6;font-style:italic">"${txt}"</div>
+          </div>
+        </div>`;
+      } else if(iGot && !iGave) {
+        // Employer rated me but I haven't rated yet → locked, prompt to rate
+        html += `<div class="blind-card" style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--neon);font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:8px">🔔 ${empName} דירג/ה אותך!</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <div style="flex-shrink:0;text-align:center">
+              <div style="font-size:11px;color:var(--w50);margin-bottom:4px">הציון שלך</div>
+              <div class="blind-score-blur">??</div>
+            </div>
+            <div style="flex:1;font-size:12px;color:var(--w80);line-height:1.6">כדי לראות את הדירוג שקיבלת, דרג/י קודם את ${empName}</div>
+          </div>
+          <button class="reveal-btn" onclick="openRateM('emp','${d.jobId}')">דרג/י את ${empName} וגלה/י את הציון ⭐</button>
+        </div>`;
+      } else if(!iGot && iGave) {
+        // I rated but employer hasn't rated yet
+        html += `<div class="card-s" style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--w50);font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:8px">⏳ ${empName} · ${jobName}</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:20px">🔒</span>
+            <div style="font-size:12px;color:var(--w50)">נתת דירוג — ממתין ל${empName} שידרג/ת בחזרה כדי לגלות את ציונך</div>
+          </div>
+        </div>`;
+      }
+    }
+
+    html += '</div>';
+    sec.innerHTML = html;
+  } catch(e) {
+    sec.innerHTML = '';
+    console.error('loadTeenBlindRatings error', e);
+  }
+}
+
+async function loadEmpBlindRatings(body) {
+  if(!S.user || S.user.type !== 'employer') return;
+  const myJobs = S.jobs.filter(j => j.empId === S.user.id);
+  if(!myJobs.length) return;
+
+  try {
+    const snap = await getDocs(query(collection(db, 'blindRatings'), where('empId','==',S.user.id)));
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if(!docs.length) return;
+
+    let html = '<div style="font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;color:var(--w50);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">דירוגים עיוורים</div>';
+    let hasContent = false;
+
+    for(const d of docs) {
+      const job = myJobs.find(j => j.id === d.jobId);
+      if(!job) continue;
+      const iGave = !!d.ratingFromEmployer;
+      const iGot  = !!d.ratingFromTeen;
+
+      if(!iGot && !iGave) continue;
+      hasContent = true;
+
+      if(iGot && iGave) {
+        const score = d.ratingFromTeen.score;
+        const txt = d.ratingFromTeen.text;
+        html += `<div class="blind-card" style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--neon);font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:8px">⭐ ${job.t} — הנוער דירג אותך</div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="blind-score-reveal" style="font-size:32px">${score}<span style="font-size:14px;font-weight:600;color:var(--w50)">/10</span></div>
+            <div style="flex:1;font-size:12px;color:var(--w80);line-height:1.6;font-style:italic">"${txt}"</div>
+          </div>
+        </div>`;
+      } else if(iGot && !iGave) {
+        html += `<div class="blind-card" style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--neon);font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:8px">🔔 הנוער ב"${job.t}" דירג אותך!</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <div style="flex-shrink:0;text-align:center">
+              <div style="font-size:11px;color:var(--w50);margin-bottom:4px">הציון שלך</div>
+              <div class="blind-score-blur">??</div>
+            </div>
+            <div style="flex:1;font-size:12px;color:var(--w80);line-height:1.6">כדי לראות מה הנוער כתב עליך, דרג/י קודם אותו</div>
+          </div>
+          <button class="reveal-btn" onclick="openRateM('teen','${d.jobId}','${d.teenId}')">דרג/י את הנוער וגלה/י את הציון ⭐</button>
+        </div>`;
+      } else if(!iGot && iGave) {
+        html += `<div class="card-s" style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--w50);font-family:Montserrat,sans-serif;font-weight:700;margin-bottom:8px">⏳ ${job.t}</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:20px">🔒</span>
+            <div style="font-size:12px;color:var(--w50)">נתת דירוג — ממתין שהנוער ידרג בחזרה</div>
+          </div>
+        </div>`;
+      }
+    }
+
+    if(hasContent && body) {
+      const section = document.createElement('div');
+      section.innerHTML = html;
+      body.appendChild(section);
+    }
+  } catch(e) { console.error('loadEmpBlindRatings error', e); }
+}
+
+async function logout() {
+  stopTeenListeners();
+  S.user = null; S.mode = 'teen'; S.jobs = []; S.apps = {};
+  S.notifications = [];
+  updateBellDot();
+  await idbSet('tj_uid', null);
+  go('s-land');
+}
+window.logout = logout;
+
+// ── GLOBAL FUNCTIONS ──
+window.go = go;
+window.goNav = goNav;
+window.setupTeen = setupTeen;
+window.setupEmp = setupEmp;
+window.openJobM = openJobM;
+window.applyJob = applyJob;
+window.openChat = openChat;
+window.showNotif = showNotif;
+window.dismissNotif = dismissNotif;
+window.renderNotifsList = renderNotifsList;
+window.updateBellDot = updateBellDot;
+window.loadTeenBlindRatings = loadTeenBlindRatings;
+window.loadEmpBlindRatings = loadEmpBlindRatings;
+
+// ── INIT CHIPS ──
+const CATS_LIST = ['מסעדנות','קמעונאות','הדרכה','שירות לקוחות','יצירה ועיצוב','ספורט ופנאי','טכנולוגיה','בייביסיטינג','דוג ווקר','ניקיון וסדר','עבודות כפיים','חקלאות וטבע','אדמיניסטרציה'];
+const iEl = document.getElementById('su-cats');
+CATS_LIST.forEach(cat => {
+  const b = document.createElement('button'); b.className='chip'; b.dataset.v=cat; b.textContent=cat;
+  b.onclick = () => b.classList.toggle('on'); iEl.appendChild(b);
+});
+const fEl = document.getElementById('fcats');
+['הכל',...CATS_LIST].forEach(c => {
+  const b = document.createElement('button'); b.className='chip'+(c==='הכל'?' on':''); b.dataset.v=c; b.textContent=c;
+  b.onclick = () => { S.selCat=c; document.querySelectorAll('#fcats .chip').forEach(x=>x.classList.toggle('on',x.dataset.v===c)); renderFeed(); };
+  fEl.appendChild(b);
+});
+
+// ── IndexedDB helpers ──
+function idbSet(key, val) {
+  return new Promise((res) => {
+    const req = indexedDB.open('tj_db', 1);
+    req.onupgradeneeded = e => e.target.result.createObjectStore('kv');
+    req.onsuccess = e => {
+      const tx = e.target.result.transaction('kv', 'readwrite');
+      tx.objectStore('kv').put(val, key);
+      tx.oncomplete = () => res();
+      tx.onerror = () => res();
+    };
+    req.onerror = () => res();
+  });
+}
+function idbGet(key) {
+  return new Promise((res) => {
+    const req = indexedDB.open('tj_db', 1);
+    req.onupgradeneeded = e => e.target.result.createObjectStore('kv');
+    req.onsuccess = e => {
+      const r = e.target.result.transaction('kv','readonly').objectStore('kv').get(key);
+      r.onsuccess = () => res(r.result || null);
+      r.onerror = () => res(null);
+    };
+    req.onerror = () => res(null);
+  });
+}
+
+// ── BOOT ──
+async function boot() {
+  const uid = await idbGet('tj_uid');
+  if(uid) {
+    try {
+      const { getDoc } = await import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js');
+      const userDoc = await getDoc(doc(db, 'users', uid));
+      if(userDoc.exists()) {
+        S.user = { id: uid, ...userDoc.data() };
+        S.mode = S.user.type || 'teen';
+        if(!S.user.name) { go(S.mode === 'employer' ? 's-emp-setup' : 's-setup'); return; }
+        if(S.mode === 'employer') {
+          document.getElementById('eh-name').textContent = S.user.name;
+          const ehAv = document.getElementById('eh-av');
+          if(S.user.photoURL) ehAv.innerHTML = `<img src="${S.user.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
+          else ehAv.textContent = S.user.name[0];
+          await loadJobs(); go('s-emp'); setETab('jobs');
+        } else {
+          const fav = document.getElementById('fav');
+          if(S.user.photoURL) fav.innerHTML = `<img src="${S.user.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
+          else fav.textContent = S.user.name[0];
+          await loadJobs();
+          const appsSnap = await getDocs(query(collection(db, 'applications'), where('teenId','==',S.user.id)));
+          appsSnap.docs.forEach(d => { S.apps[d.data().jobId] = d.data().status; });
+          goNav('s-feed');
+          setTimeout(() => startTeenListeners(), 1500);
+        }
+        return;
+      }
+    } catch(e) { console.log('boot error', e); }
+  }
+  go('s-land');
+}
+
+boot();
+</script>
+
+
+</body></html>
